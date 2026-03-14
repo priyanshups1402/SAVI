@@ -1,0 +1,204 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Happy Birthday Savi ❤️</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="music" autoplay loop>
+<source src="savi.mp3" type="audio/mpeg">
+</audio>
+
+
+<div class="container">
+
+<!-- STEP 1 -->
+
+<section class="step active" id="step1">
+
+<h1 class="glow">Hey Savi ❤️</h1>
+
+<p class="glow">I made something special for you</p>
+
+<button onclick="nextStep(2)">Start Surprise</button>
+
+</section>
+
+
+<!-- STEP 2 -->
+
+<section class="step" id="step2">
+
+<h1 class="glow">For You 💖</h1>
+
+<p class="glow">
+
+Before I wish you Happy Birthday... <br>
+I want you to see some memories with you.
+
+</p>
+
+<button onclick="nextStep(3)">See Memories</button>
+
+</section>
+
+
+<!-- STEP 3 (PHOTOS) -->
+
+<section class="step" id="step3">
+
+<h1 class="glow">Our Memories 📸</h1>
+
+<div class="slideshow">
+
+<img src="s1.jpg" class="photo active">
+
+<img src="s2.jpg" class="photo">
+
+<img src="s3.jpg" class="photo">
+
+<img src="s4.jpg" class="photo">
+
+<img src="s5.jpg" class="photo">
+
+</div>
+
+<button onclick="nextStep(4)">Next Surprise</button>
+
+</section>
+
+
+
+<!-- STEP 4 MESSAGE -->
+
+<section class="step" id="step4">
+
+<h1 class="glow">My Message For You 💌</h1>
+
+<p id="typewriter" class="romantic-text"></p>
+
+<button onclick="nextStep(5)">Final Surprise</button>
+
+</section>
+
+
+
+<!-- STEP 5 FINAL -->
+
+<section class="step" id="step5">
+
+<h1 class="glow">🎂 Happy Birthday Savi 🎉</h1>
+
+<p class="glow">
+
+You are the most beautiful part of my life ❤️
+
+</p>
+
+<h2 class="glow">Forever Yours 💖</h2>
+
+<h3 class="glow">— From Shubh ❤️</h3>
+
+</section>
+
+
+</div>
+
+
+
+<script>
+
+function nextStep(step){
+
+document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"));
+
+document.getElementById("step"+step).classList.add("active");
+
+}
+
+
+
+/* TYPEWRITER MESSAGE */
+
+const message = `
+
+Suno bby humko aapse kuch kahena tha but hum kabhi kahe nhi paye....
+ya kabhi himaat ki but phir hum log ladai main and baaton main kahena bhul gye
+so aaj main apse kahena chahta hu sabse phly to aapko Happy Birthday
+to my angle 🤍🧿
+
+and now moje kahena yeah hn ki kabhi tension na le humesha smile krti rahe
+and kabhi yeah na soche ki main choodh kr jaounga....
+
+balhi main tumper gussa krlo daat lo kuch bhi kahe lo but iska mean yeah
+nhi ki main aapse pyaar nhi krta hu cheat krta hu....
+
+betu insaaan sabse jadha ladai or fikar oski hi krta hn jisko bo sabse
+jadha apni life main chahta hn jaisa ki hum aapko....
+
+and kabhi sad mt hona aap bcz aapki smile hi meri power hn
+aapko smile krta dekhta hona wahi meri motivation hn
+
+aapko smile krta dekhne ka liya hum sab kr sakte hn
+
+and mera liya success ka mean yeah nhi hn ki successfull huker aapse
+shadi Krna nhi....
+
+mera liya successfull hone ka mean hn aapko apne sath success hota
+dekhna kabhi aap apni raha sa bhatko to aapko sahi Raha per lana
+
+or at end aapke sath success hoker ek happy heaven life jeena
+
+and main humesha sa sochta tha sabke partner sabko itna support krte hn
+yeah bo kya yahi real love hota hn
+
+but shyd yeah real love nhi hota....
+
+real love main aapko krte dekha hain apne parents family ka against
+jaaker mera liya stand lena
+
+and bahut kuch aapne aisa kiya hn mera liya jiska main jindagi bhar
+karjdaar rahunga
+
+so thanku so much my dear love
+meri wiffey meri life main aane ka liya
+
+and again Many Many Happy Returns of the Day
+to my love ones.... ❤️🧿
+
+— From Shubh ❤️
+
+`;
+
+let i = 0;
+
+function typeWriter(){
+
+if(i < message.length){
+
+document.getElementById("typewriter").innerHTML += message.charAt(i);
+
+i++;
+
+setTimeout(typeWriter,35);
+
+}
+
+}
+
+typeWriter();
+
+</script>
+
+</body>
+</html>
+```
