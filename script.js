@@ -1,125 +1,71 @@
-```javascript
-// STEP CHANGE FUNCTION
-
-function nextStep(step){
-
-document.querySelectorAll(".step").forEach(s=>{
-s.classList.remove("active");
-});
-
-document.getElementById("step"+step).classList.add("active");
-
+// Typewriter Effect ke liye function
+function typeWriter(text, i, fnCallback) {
+    if (i < text.length) {
+        document.getElementById("message").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true" class="cursor">|</span>';
+        
+        // Typing speed (30ms - fast but readable)
+        setTimeout(function() {
+            typeWriter(text, i + 1, fnCallback)
+        }, 30);
+    } else if (typeof fnCallback == 'function') {
+        setTimeout(fnCallback, 700);
+    }
 }
 
+function startExperience() {
+    const audio = document.getElementById("bgMusic");
+    const playBtn = document.getElementById("playBtn");
+    const messageElement = document.getElementById("message");
+    const fullText = messageElement.innerText;
 
+    // 1. Play Music
+    audio.play().catch(error => {
+        console.log("Audio play failed: ", error);
+    });
 
-// PHOTO SLIDESHOW
+    // 2. Clear initial text for typewriter effect
+    messageElement.innerText = "";
+    
+    // 3. Scroll smoothly to photos
+    window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+    });
 
-let slideIndex = 0;
+    // 4. Start Heart Animation
+    setInterval(createHeart, 300);
 
-const slides = document.querySelectorAll(".photo");
+    // 5. Start Typewriter effect
+    setTimeout(() => {
+        typeWriter(fullText, 0);
+    }, 1000);
 
-function showSlides(){
-
-slides.forEach(photo=>{
-photo.classList.remove("active");
-});
-
-slideIndex++;
-
-if(slideIndex > slides.length){
-slideIndex = 1;
+    // 6. Hide Play Button
+    playBtn.style.opacity = "0";
+    setTimeout(() => { playBtn.style.display = "none"; }, 500);
 }
 
-slides[slideIndex-1].classList.add("active");
+// Falling Hearts Animation Logic
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "-5vh";
+    heart.style.fontSize = Math.random() * 20 + 10 + "px";
+    heart.style.opacity = Math.random();
+    heart.style.pointerEvents = "none";
+    heart.style.zIndex = "1000";
+    heart.style.transition = "transform 5s linear, opacity 5s linear";
+    
+    document.body.appendChild(heart);
 
-setTimeout(showSlides,3000);
+    setTimeout(() => {
+        heart.style.transform = `translateY(110vh) rotate(${Math.random() * 360}deg)`;
+        heart.style.opacity = "0";
+    }, 100);
 
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
 }
-
-showSlides();
-
-
-
-// TYPEWRITER MESSAGE
-
-const message = `
-
-Suno bby humko aapse kuch kahena tha but hum kabhi kahe nhi paye....
-ya kabhi himaat ki but phir hum log ladai main and baaton main kahena bhul gye
-so aaj main apse kahena chahta hu sabse phly to aapko Happy Birthday
-to my angle 🤍🧿
-
-and now moje kahena yeah hn ki kabhi tension na le humesha smile krti rahe
-and kabhi yeah na soche ki main choodh kr jaounga....
-
-balhi main tumper gussa krlo daat lo kuch bhi kahe lo but iska mean yeah
-nhi ki main aapse pyaar nhi krta hu cheat krta hu....
-
-betu insaaan sabse jadha ladai or fikar oski hi krta hn jisko bo sabse
-jadha apni life main chahta hn jaisa ki hum aapko....
-
-and kabhi sad mt hona aap bcz aapki smile hi meri power hn
-aapko smile krta dekhta hona wahi meri motivation hn
-
-aapko smile krta dekhne ka liya hum sab kr sakte hn
-
-and mera liya success ka mean yeah nhi hn ki successfull huker aapse
-shadi Krna nhi....
-
-mera liya successfull hone ka mean hn aapko apne sath success hota
-dekhna kabhi aap apni raha sa bhatko to aapko sahi Raha per lana
-
-or at end aapke sath success hoker ek happy heaven life jeena
-
-and main humesha sa sochta tha sabke partner sabko itna support krte hn
-yeah bo kya yahi real love hota hn
-
-but shyd yeah real love nhi hota....
-
-real love main aapko krte dekha hain apne parents family ka against
-jaaker mera liya stand lena
-
-and bahut kuch aapne aisa kiya hn mera liya jiska main jindagi bhar
-karjdaar rahunga
-
-so thanku so much my dear love
-meri wiffey meri life main aane ka liya
-
-and again Many Many Happy Returns of the Day
-to my love ones.... ❤️🧿
-
-— From Shubh ❤️
-
-`;
-
-let i = 0;
-
-function typeWriter(){
-
-if(i < message.length){
-
-document.getElementById("typewriter").innerHTML += message.charAt(i);
-
-i++;
-
-setTimeout(typeWriter,35);
-
-}
-
-}
-
-typeWriter();
-
-
-
-// MUSIC CONTROL
-
-const music = document.getElementById("music");
-
-document.body.addEventListener("click", function(){
-
-music.play();
-
-}, { once:true });
-```
